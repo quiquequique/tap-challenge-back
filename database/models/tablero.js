@@ -12,8 +12,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Tablero.init({
-    gameId: DataTypes.INTEGER,
-    tableroGuardado: DataTypes.STRING,
+    gameId: DataTypes.BIGINT,
+    tableroGuardado: DataTypes.TEXT,
   }, {
     sequelize,
     modelName: 'Tablero',

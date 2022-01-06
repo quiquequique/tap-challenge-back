@@ -1,12 +1,37 @@
-/* eslint-disable linebreak-style */
+const { tableroGuardado, guardarPartida } = require('../services/db.partidas');
+const { PartidaNueva } = require('../services/creaPartida');
+
 const controller = {
 
-  buscarPartida: (req, res) => {
-    res.send('devuelve partida');
+  buscarPartida: async (req, res) => {
+    const { id } = req.params;
+    if (id === undefined) {
+      const tablero = new PartidaNueva();
+      res.send(tablero);
+    } else {
+      try {
+        const tablero = await tableroGuardado(id);
+        if (tablero) {
+          res.send(tablero);
+        } else {
+          const tablero2 = new PartidaNueva();
+          res.send(tablero2);
+        }
+      } catch (err) {
+        res.send(err);
+      }
+    }
   },
 
-  guardaPartida: (req, res) => {
-    res.send('guarda partida');
+  guardaPartida: async (req, res) => {
+    const partidaInconclusa = req.body;
+    try {
+      // console.log(req.body);
+      await guardarPartida(partidaInconclusa);
+    } catch (err) {
+      console.log(err);
+    }
+    res.send('guardada partida');
   },
 
 };

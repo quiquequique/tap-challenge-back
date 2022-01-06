@@ -4,7 +4,7 @@ const { buscarPartida, guardaPartida } = require('../controllers/partidas.contro
 const router = express.Router();
 
 /* GET users listing. */
-router.get('/', buscarPartida);
+router.get('/:id?', buscarPartida);
 router.post('/', guardaPartida);
 
 module.exports = router;
