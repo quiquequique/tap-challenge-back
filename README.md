@@ -34,6 +34,7 @@ POST   {{url}}/api
 _body:
 
 partidaId: BIGINT
+
 tablero:  [] Json
 
 ### Devolver partida guardada:
