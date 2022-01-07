@@ -24,12 +24,15 @@ const tableroGuardado = async (id) => {
 };
 
 const guardarPartida = async (partida) => {
-  const { partidaAGuardar } = partida;
-  const partidaParseada = JSON.parse(partidaAGuardar);
-  console.log(`partida guardada: ${partidaParseada.partidaId}`);
+
+  console.log(partida);
+  const { partidaId } = partida;
+  const { tablero } = partida;
+  // const partidaParseada = JSON.parse(partidaAGuardar);
+  // console.log(`partida guardada: ${partidaParseada.partidaId}`);
   const paraGuardar = {
-    gameId: partidaParseada.partidaId,
-    tableroGuardado: JSON.stringify(partidaParseada.tablero),
+    gameId: partidaId,
+    tableroGuardado: tablero,
   };
   try {
     const guardarJuego = await Tablero.create(paraGuardar);

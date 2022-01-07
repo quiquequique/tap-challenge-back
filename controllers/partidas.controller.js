@@ -12,12 +12,17 @@ const controller = {
       try {
         const tablero = await tableroGuardado(id);
         if (tablero) {
-          res.send(tablero);
+          const respuesta = {
+            partidaId: tablero.dataValues.gameId,
+            tablero: JSON.parse(tablero.dataValues.tableroGuardado),
+          };
+          res.send(respuesta);
         } else {
           const tablero2 = new PartidaNueva();
           res.send(tablero2);
         }
       } catch (err) {
+        // agregar error
         res.send(err);
       }
     }
@@ -29,6 +34,7 @@ const controller = {
       // console.log(req.body);
       await guardarPartida(partidaInconclusa);
     } catch (err) {
+      // agregar respuesta servidor
       console.log(err);
     }
     res.send('guardada partida');
